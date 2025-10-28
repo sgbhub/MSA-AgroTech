@@ -1,0 +1,54 @@
+@startuml Архитектура_АгроТех_Фермы_v1.0
+
+Class User {
+	String id 
+	String username
+	String phone 
+	
+	Boolean authenticate(OTP: String)
+	String add(username: String, phone: String)
+	Boolean delete(id: String)
+	Boolean update(id: String, phone: String) 
+}
+
+Class UserRights {
+	String userid 
+	String animals
+	String devices
+	
+	String authorise()
+	Boolean update(userid: String, animals: String, devices: String) 
+}
+
+Class Animal {
+	String id 
+	Date birhtdate
+	
+	Boolean add(id: String, birhtdate: Date) 
+	Boolean delete(id: String)
+	Boolean update(id: String, birhtdate: Date)
+	Integer getage(id: String) 
+}
+
+Class Device {
+	String id
+	String type
+	String state
+	
+	Boolean add(id: String, type: String, state: String)
+	Boolean delete(id: String)
+	Boolean update(id: String, type: String, state: String)
+}
+
+Class AnimalDevices {
+	String animalid
+	String deviceid
+	
+	String getstates(animalid: String, deviceid: String)
+}
+
+User "1" - "1" UserRights
+Animal "0..*" - "1" AnimalDevices 
+AnimalDevices "0..*" - "1" Device
+
+@enduml
